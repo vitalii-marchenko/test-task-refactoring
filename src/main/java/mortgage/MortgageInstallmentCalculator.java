@@ -23,7 +23,6 @@ public class MortgageInstallmentCalculator {
         // convert interest rate into a decimal - eg. 6.5% = 0.065
         interestRate /= 100.0;
 
-        // convert term in years to term in months
         double termInMonths = termInYears * monthsInYear;
 
         if (interestRate == 0) {
