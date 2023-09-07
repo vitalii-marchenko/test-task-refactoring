@@ -1,4 +1,5 @@
-import mortgage.MortgageInstallmentCalculator;
+package mortagage;
+
 import org.junit.Assert;
 import org.junit.Test;
 
