@@ -11,7 +11,7 @@ public class MortgageInstallmentCalculator {
      * @param interestRate rate of interest, cost of borrowing the principal
      * @return monthly payment amount
      */
-    public static double calculateMonthlyPayment(
+    public static double calculateMortgagePayment(
             int principalAmount,
             int termInYears,
             double interestRate
@@ -30,9 +30,15 @@ public class MortgageInstallmentCalculator {
             return principalAmount / termInMonths;
         }
 
-        double interestRateInMonths = interestRate / monthsInYear;
+        return calculateMonthlyPayment(principalAmount, termInMonths, interestRate);
+    }
 
-        // calculate the monthly payment
+    private static double calculateMonthlyPayment(
+            int principalAmount,
+            double termInMonths,
+            double interestRate
+    ) {
+        double interestRateInMonths = interestRate / monthsInYear;
         return (principalAmount * interestRateInMonths) / (1 - Math.pow(1 + interestRateInMonths, -termInMonths));
     }
 }
