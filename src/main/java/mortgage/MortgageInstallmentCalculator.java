@@ -16,12 +16,7 @@ public class MortgageInstallmentCalculator {
             int termInYears,
             double interestRate
     ) {
-        if (principalAmount < 0 || termInYears <= 0 || interestRate < 0) {
-            throw new RuntimeException("Negative values are not allowed");
-        }
-
-        // convert interest rate into a decimal - eg. 6.5% = 0.065
-        interestRate /= 100.0;
+        validateInput(principalAmount, termInYears, interestRate);
 
         double termInMonths = termInYears * monthsInYear;
 
@@ -32,11 +27,23 @@ public class MortgageInstallmentCalculator {
         return calculateMonthlyPayment(principalAmount, termInMonths, interestRate);
     }
 
+    private static void validateInput(
+            int principalAmount,
+            int termInYears,
+            double interestRate
+    ) {
+        if (principalAmount < 0 || termInYears <= 0 || interestRate < 0) {
+            throw new RuntimeException("Negative values are not allowed");
+        }
+    }
+
     private static double calculateMonthlyPayment(
             int principalAmount,
             double termInMonths,
             double interestRate
     ) {
+        // convert interest rate into a decimal - eg. 6.5% = 0.065
+        interestRate /= 100.0;
         double interestRateInMonths = interestRate / monthsInYear;
         return (principalAmount * interestRateInMonths) / (1 - Math.pow(1 + interestRateInMonths, -termInMonths));
     }
